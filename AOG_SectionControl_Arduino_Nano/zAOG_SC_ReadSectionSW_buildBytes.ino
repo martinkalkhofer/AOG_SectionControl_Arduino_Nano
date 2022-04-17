@@ -32,7 +32,7 @@ void SectSWRead()
 
 
 	//AUTO / MAN SW
-	if (AutoSWVal == LOW)  SectAuto = false; //pullup = auto if open or not connected
+	if (AutoSWVal == HIGH)  SectAuto = false; //pullup = auto if open or not connected
 	else SectAuto = true;
 	if (SectAuto != SectAutoOld)
 	{
@@ -62,8 +62,8 @@ void SectSWRead()
 	}
 	
 	//if Main toggle switch pressed, use it for delay time and signal to AGO stays for SectSWDelayTime
-	if (MainSWVal > SWON) { SectMainOn = true; SectMainSWpressed = true; SectMainSWlastTime = SectSWcurrentTime; }
-	if (MainSWVal < SWOFF) { SectMainOn = false; SectMainSWpressed = true; SectMainSWlastTime = SectSWcurrentTime; }
+	if (MainSWVal > SWON) { SectMainOn = false; SectMainSWpressed = true; SectMainSWlastTime = SectSWcurrentTime; }
+	if (MainSWVal < SWOFF) { SectMainOn = true; SectMainSWpressed = true; SectMainSWlastTime = SectSWcurrentTime; }
 	if (SectSWcurrentTime > SectMainSWlastTime + SectSWDelayTime) { SectMainSWpressed = false; }
 
 	//if any section is spraying by AOG, and MainSW is not used set MainOn = ON, else OFF

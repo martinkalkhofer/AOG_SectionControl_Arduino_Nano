@@ -19,7 +19,7 @@ struct set {
 	//User config: ***********************************************************************************
 	uint8_t aogVersion = 20;			//V4.3.10 = 17, V4.6 + V5.x.20 = 20
 
-	uint8_t LEDWiFi_PIN = 13;			// WiFi Status LED 255 = off
+	uint8_t LEDWiFi_PIN = 255;			// WiFi Status LED 255 = off
 	uint8_t LEDWiFi_ON_Level = 1;		// 1 = HIGH = LED on high, 0 = LOW = LED on low
 
 	uint16_t BaudRate = 38400;              //Baudrate = speed of serial port or USB or Bluetooth. AOG uses 38400 for UART
@@ -31,7 +31,7 @@ struct set {
 //Example1: motor valve is controled only by Switch not by AOG, no Flowmeter, : RateControl..Equiped = false; RateSW..Equiped = true; RateControlPWM = false;
 //Example2: PWM valve, with flowmeter all controled by AOG:   RateControl..Equiped = true; RateSW..Equiped = true; RateControlPWM = true;	
 	uint8_t RateControlLeftInst = 0;		//1 if Rate control is there, else: 0
-	uint8_t RateSWLeftInst = 1;			    //1 if Rate control Pressure switch is there, else: 0
+	uint8_t RateSWLeftInst = 0;			    //1 if Rate control Pressure switch is there, else: 0
 	uint8_t RateSWLeft_PIN = A6;			//Rate +/- switch
 	uint8_t RateControlPWM = 0;				//1 if PWM valve, 0 if Motor drive for pressure change		
 
@@ -46,15 +46,15 @@ struct set {
 	uint8_t	FlowPWMRight_PIN = 255;			//255  = unused Rate-Control Valve PWM
 	uint8_t	FlowEncARight_PIN = 255;		//Flowmeter right/2 
 
-	uint8_t SectNum = 6;					// number of sections
+	uint8_t SectNum = 5;					// number of sections
 	uint8_t SectRelaysInst = 1;				//relays for SC output are equiped (0=no output, only documentation)
-	uint8_t SectRelaysON = 1;				//relays spray on 1 or 0 (high or low)
-	uint8_t Relay_PIN[16] = { 10,9,8,7,6,5,255,255,255,255,255,255,255,255,255,255 };  //GPIOs of ESP32 OUT to sections of sprayer HIGH/3.3V = ON
+	uint8_t SectRelaysON = 0;				//relays spray on 1 or 0 (high or low)
+	uint8_t Relay_PIN[16] = { 13,10,9,8,7,255,255,255,255,255,255,255,255,255,255,255 };  //GPIOs of ESP32 OUT to sections of sprayer HIGH/3.3V = ON
 	uint8_t Relais_MainValve_PIN = 255;		//PIN for Main fluid valve 255 = unused
 	uint8_t SectSWInst = 1;					//1 if section input switches are equiped, else: 0	
-	uint8_t SectSWAutoOrOn = 1;				//Section switches spray/auto on 1 = high = used with pullup, 0 = low = pulldown 
+	uint8_t SectSWAutoOrOn = 0;				//Section switches spray/auto on 1 = high = used with pullup, 0 = low = pulldown 
 
-	uint8_t SectSW_PIN[16] = { A0,A1,A2,A3,A4,A5,3,255,255,255,255,255,255,255,255,255 };// section switches to GPIOs of ESP32 GND = section off, open/+3.3V section auto/on
+	uint8_t SectSW_PIN[16] = { A0,A1,A2,A3,A4,255,255,255,255,255,255,255,255,255,255,255 };// section switches to GPIOs of ESP32 GND = section off, open/+3.3V section auto/on
 
 	uint8_t	SectMainSWType = 1;				// 0 = not equiped 1 = (ON)-OFF-(ON) toggle switch or push buttons 2 = connected to hitch level sensor 3 = inverted hitch level sensor
 	uint16_t HitchLevelVal = 500;		    // Value for hitch level: switch AOG section control to Auto if lower than... ESP:2000 nano 500
